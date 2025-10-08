@@ -23,16 +23,20 @@ export default function Users() {
   return (
     <AdminLayout>
       {/* Judul Halaman */}
-      <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100 px-2 sm:px-0">
         Users
       </h2>
 
       {/* Card Wrapper */}
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
+      <div className="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-xl shadow w-full overflow-hidden">
+        <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-900 dark:text-gray-100">
           Latest Users
         </h3>
-        <UserTable users={users} setUsers={setUsers} />
+
+        {/* Table Component */}
+        <div className="overflow-x-auto">
+          <UserTable users={users} setUsers={setUsers} />
+        </div>
       </div>
     </AdminLayout>
   );

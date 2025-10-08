@@ -104,13 +104,13 @@ export default function UserTable() {
   };
 
   return (
-    <div>
+    <div className="w-full">
       {/* Header */}
-      <div className="flex justify-between mb-4">
+      <div className="flex flex-col sm:flex-row justify-between gap-3 mb-4">
         <input
           type="text"
           placeholder="Search users..."
-          className="border border-gray-300 dark:border-gray-700 px-3 py-2 rounded-lg text-sm w-1/3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
+          className="border border-gray-300 dark:border-gray-700 px-3 py-2 rounded-lg text-sm sm:w-1/3 w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -120,70 +120,72 @@ export default function UserTable() {
             setNewUser({ name: "", email: "", role: "" });
             setIsModalOpen(true);
           }}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-full sm:w-auto"
         >
           Add User
         </button>
       </div>
 
-      {/* Table */}
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100 dark:bg-gray-700">
-            <th
-              className="text-left p-2 cursor-pointer select-none"
-              onClick={() => requestSort("name")}
-            >
-              Name{" "}
-              {sortConfig.key === "name" &&
-                (sortConfig.direction === "asc" ? "↑" : "↓")}
-            </th>
-            <th
-              className="text-left p-2 cursor-pointer select-none"
-              onClick={() => requestSort("email")}
-            >
-              Email{" "}
-              {sortConfig.key === "email" &&
-                (sortConfig.direction === "asc" ? "↑" : "↓")}
-            </th>
-            <th
-              className="text-left p-2 cursor-pointer select-none"
-              onClick={() => requestSort("role")}
-            >
-              Role{" "}
-              {sortConfig.key === "role" &&
-                (sortConfig.direction === "asc" ? "↑" : "↓")}
-            </th>
-            <th className="text-left p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedUsers.map((user) => (
-            <tr
-              key={user.id}
-              className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-            >
-              <td className="p-2">{user.name}</td>
-              <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.role}</td>
-              <td className="p-2 flex gap-2">
-                <button
-                  onClick={() => handleEdit(user)}
-                  className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(user.id)}
-                  className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
-                >
-                  Delete
-                </button>
-              </td>
+      {/* Table (scrollable in mobile) */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-sm sm:text-base">
+          <thead>
+            <tr className="bg-gray-100 dark:bg-gray-700">
+              <th
+                className="text-left p-2 cursor-pointer select-none"
+                onClick={() => requestSort("name")}
+              >
+                Name{" "}
+                {sortConfig.key === "name" &&
+                  (sortConfig.direction === "asc" ? "↑" : "↓")}
+              </th>
+              <th
+                className="text-left p-2 cursor-pointer select-none"
+                onClick={() => requestSort("email")}
+              >
+                Email{" "}
+                {sortConfig.key === "email" &&
+                  (sortConfig.direction === "asc" ? "↑" : "↓")}
+              </th>
+              <th
+                className="text-left p-2 cursor-pointer select-none"
+                onClick={() => requestSort("role")}
+              >
+                Role{" "}
+                {sortConfig.key === "role" &&
+                  (sortConfig.direction === "asc" ? "↑" : "↓")}
+              </th>
+              <th className="text-left p-2">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedUsers.map((user) => (
+              <tr
+                key={user.id}
+                className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                <td className="p-2">{user.name}</td>
+                <td className="p-2">{user.email}</td>
+                <td className="p-2">{user.role}</td>
+                <td className="p-2 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => handleEdit(user)}
+                    className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(user.id)}
+                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {sortedUsers.length === 0 && (
         <p className="text-gray-500 dark:text-gray-400 text-sm mt-4">
@@ -193,9 +195,9 @@ export default function UserTable() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg w-[400px] shadow-lg">
-            <h2 className="text-lg font-semibold mb-4 dark:text-gray-100">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-2">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg w-11/12 sm:w-[400px] shadow-lg">
+            <h2 className="text-lg font-semibold mb-4 dark:text-gray-100 text-center sm:text-left">
               {isEditing ? "Edit User" : "Add New User"}
             </h2>
             <form onSubmit={handleAddUser}>
@@ -230,7 +232,7 @@ export default function UserTable() {
                   <option value="Admin">Admin</option>
                 </select>
               </div>
-              <div className="mt-5 flex justify-end gap-3">
+              <div className="mt-5 flex flex-col sm:flex-row justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
