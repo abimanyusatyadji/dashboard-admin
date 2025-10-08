@@ -32,7 +32,7 @@ export default function Sidebar() {
 
       {/* Sidebar utama */}
       <aside
-        className={`fixed top-0 h-screen w-64 bg-blue-700 dark:bg-blue-900 text-white p-6 flex flex-col justify-between transition-transform duration-300 z-40
+        className={`fixed top-0 min-h-screen w-64 bg-blue-700 dark:bg-blue-900 text-white p-6 flex flex-col justify-between transition-transform duration-300 z-40
         lg:left-0 lg:translate-x-0 
         ${isOpen ? "translate-x-0 right-0" : "translate-x-full right-0"} 
         lg:right-auto lg:translate-x-0`}
