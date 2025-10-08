@@ -13,6 +13,7 @@ export default function AdminLayout({ children }) {
           transition-colors 
           min-h-screen
           lg:ml-64  /* Sidebar tetap memberi ruang di desktop */
+          overflow-x-hidden
         "
       >
         {children}

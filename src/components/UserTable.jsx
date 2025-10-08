@@ -170,13 +170,13 @@ export default function UserTable() {
                 <td className="p-2 flex flex-wrap gap-2">
                   <button
                     onClick={() => handleEdit(user)}
-                    className="px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                    className="min-w-[80px] text-center px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(user.id)}
-                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                    className="min-w-[80px] text-center px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition"
                   >
                     Delete
                   </button>
